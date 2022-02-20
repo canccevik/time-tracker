@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:time_tracker/screens/history/progress_bar.dart';
-import 'package:time_tracker/screens/history/edit_history/edit_history.dart';
-import 'package:time_tracker/widgets/circle_time_info.dart';
+import 'package:time_tracker/presentation/screens/history/edit_history/edit_history.dart';
+import 'package:time_tracker/presentation/screens/history/progress_bar.dart';
+import 'package:time_tracker/presentation/widgets/circle_time_info.dart';
 
 class HistoryTile extends StatefulWidget {
   const HistoryTile({Key? key}) : super(key: key);

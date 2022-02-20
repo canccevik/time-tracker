@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:time_tracker/screens/app.dart';
+import 'package:time_tracker/presentation/screens/app.dart';
 
 void main() {
   runApp(

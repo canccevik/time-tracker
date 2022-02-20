@@ -3,9 +3,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:date_picker_timeline_trendway/date_picker_widget.dart';
-import 'package:time_tracker/screens/history/history.dart';
-import 'package:time_tracker/screens/home/home.dart';
-import 'package:time_tracker/screens/settings/settings.dart';
+
+import 'package:time_tracker/presentation/screens/home/home.dart';
+import 'package:time_tracker/presentation/screens/history/history.dart';
+import 'package:time_tracker/presentation/screens/settings/settings.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);

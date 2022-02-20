@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:time_tracker/screens/history/history_tile.dart';
-
+import 'package:time_tracker/presentation/screens/history/history_tile.dart';
 
 class History extends StatefulWidget {
   const History({Key? key}) : super(key: key);

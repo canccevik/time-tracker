@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:custom_timer/custom_timer.dart';
 
-import 'package:time_tracker/widgets/circle_time_info.dart';
+import 'package:time_tracker/presentation/widgets/circle_time_info.dart';
 
 class InfoContainer extends StatefulWidget {
   const InfoContainer({Key? key}) : super(key: key);

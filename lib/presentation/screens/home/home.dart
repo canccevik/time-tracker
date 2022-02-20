@@ -3,8 +3,8 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:time_tracker/screens/home/info_container.dart';
-import 'package:time_tracker/screens/home/circular_wave.dart';
+import 'package:time_tracker/presentation/screens/home/circular_wave.dart';
+import 'package:time_tracker/presentation/screens/home/info_container.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
