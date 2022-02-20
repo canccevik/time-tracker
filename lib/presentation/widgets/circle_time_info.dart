@@ -26,11 +26,11 @@ class _CircleTimeInfoState extends State<CircleTimeInfo> {
         Container(
           width: widget.size.width,
           height: widget.size.height,
-          decoration: const BoxDecoration(
-            color: Color(0xff5f80f5),
-            borderRadius: BorderRadius.all(Radius.circular(90))
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: const BorderRadius.all(Radius.circular(90))
           ),
-          child: Icon(widget.iconData, color: Colors.white),
+          child: Icon(widget.iconData),
         ),
         const SizedBox(height: 5),
         Text(

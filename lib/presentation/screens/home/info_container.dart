@@ -25,9 +25,9 @@ class _InfoContainerState extends State<InfoContainer> {
     return Center(
       child: Container(
         width: MediaQuery.of(context).size.width * 0.85,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20))
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.all(Radius.circular(20))
         ),
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -41,40 +41,34 @@ class _InfoContainerState extends State<InfoContainer> {
                 builder: (time) {
                   return Text(
                     "${time.hours}:${time.minutes}:${time.seconds}",
-                    style: const TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold
-                    )
+                    style: Theme.of(context).textTheme.headlineLarge
                   );
                 }
               ),
-              const Text(
+              Text(
                 '-01:40h',
-                style: TextStyle(
-                  fontSize: 15,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.red
-                ),
+                )
               ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
+                children: [
                   CircleTimeInfo(
-                    size: Size(45, 45),
+                    size: const Size(45, 45),
                     iconData: Icons.timer,
                     time: '09:00',
-                    textStyle: TextStyle(
-                      fontSize: 16,
+                    textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w500
                     )
                   ),
                   CircleTimeInfo(
-                    size: Size(45, 45),
+                    size: const Size(45, 45),
                     iconData: Icons.flag,
                     time: '18:00',
-                    textStyle: TextStyle(
-                      fontSize: 16,
+                    textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w500
                     )
                   )

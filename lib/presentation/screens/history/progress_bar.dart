@@ -16,14 +16,13 @@ class _ProgressBarState extends State<ProgressBar> {
       radius: 50.0,
       lineWidth: 7,
       percent: 0.65,
-      center: const Text(
+      center: Text(
         '08:20h',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontWeight: FontWeight.bold
         )
       ),
-      progressColor: const Color(0xff5f80f5),
+      progressColor: Theme.of(context).primaryColor,
       backgroundColor: Colors.grey.shade200
     );
   }

@@ -23,23 +23,20 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff5f7f9),
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Time Tracker',
-          style: TextStyle(
-            fontSize: 22,
-            color: Colors.black,
-            fontWeight: FontWeight.w500
-          )
+          style: Theme.of(context).textTheme.titleLarge
         ),
-        backgroundColor: Colors.white,
         elevation: 0,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
-              icon: const Icon(Icons.settings, color: Colors.black),
+              icon: Icon(
+                Icons.settings,
+                color: Theme.of(context).primaryIconTheme.color,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -50,7 +47,7 @@ class _AppState extends State<App> {
           )
         ],
         bottom: currentScreenIndex == 0 ? PreferredSize(
-          child: buildDatePicker(),
+          child: buildDatePicker(context),
           preferredSize: const Size(100, 90)
         ) : null,
       ),
@@ -71,14 +68,14 @@ class _AppState extends State<App> {
 
   DateTime mostRecentSunday(DateTime date) => DateTime(date.year, date.month, date.day - date.weekday % 7);
 
-  Widget buildDatePicker() {
+  Widget buildDatePicker(BuildContext context) {
     return DatePicker(
       mostRecentSunday(DateTime.now()),
       initialSelectedDate: DateTime.now(),
       daysCount: 7,
       height: 90,
-      selectionColor: const Color(0xff5f80f5),
-      selectedTextColor: Colors.white,
+      selectionColor: Theme.of(context).primaryColor,
+      selectedTextColor: Theme.of(context).iconTheme.color,
       onDateChange: (date) {}
     );
   }

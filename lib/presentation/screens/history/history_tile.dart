@@ -35,35 +35,29 @@ class _HistoryTileState extends State<HistoryTile> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         '19 Feb 2022',
-                        style: TextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 18
-                        ),
+                        )
                       ),
                       SizedBox(
                         width: 100,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children: [
                             CircleTimeInfo(
-                              size: Size(35, 35),
+                              size: const Size(35, 35),
                               iconData: Icons.timer,
                               time: '09:00',
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500
-                              )
+                              textStyle: Theme.of(context).textTheme.labelLarge!
                             ),
                             CircleTimeInfo(
-                              size: Size(35, 35),
+                              size: const Size(35, 35),
                               iconData: Icons.flag,
                               time: '18:00',
-                              textStyle: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500
-                              )
+                              textStyle: Theme.of(context).textTheme.labelLarge!
                             ),
                           ],
                         ),

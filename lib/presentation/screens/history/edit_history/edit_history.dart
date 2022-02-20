@@ -12,18 +12,16 @@ class _EditHistoryState extends State<EditHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Edit History',
-          style: TextStyle(
-            fontSize: 22,
-            color: Colors.black,
-            fontWeight: FontWeight.w500
-          )
+          style: Theme.of(context).textTheme.titleLarge
         ),
-        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Theme.of(context).primaryIconTheme.color
+          ),
           onPressed: () {
             Navigator.pop(context);
           },

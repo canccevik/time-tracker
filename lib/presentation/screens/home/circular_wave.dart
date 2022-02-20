@@ -22,16 +22,12 @@ class _CircularWaveState extends State<CircularWave> {
       flowSpeed: 1,
       waveDistance: 45,
       waveHeight: 20,
-      waterColor: const Color(0xff5f80f5),
+      waterColor: Theme.of(context).primaryColor,
       strokeCircleColor: Colors.grey.shade200,
       heightController: waterController,
       percentage: waterHeight,
       size: const Size(250, 250),
-      textStyle: const TextStyle(
-          color: Colors.black,
-          fontSize: 60.0,
-          fontWeight: FontWeight.bold
-      ),
+      textStyle: Theme.of(context).textTheme.displayLarge
     );
   }
 }

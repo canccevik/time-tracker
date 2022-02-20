@@ -21,10 +21,7 @@ class _SettingsTileState extends State<SettingsTile> {
           children: [
             Text(
               widget.title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 16
-              ),
+              style: Theme.of(context).textTheme.bodyMedium
             ),
             widget.child
           ],
