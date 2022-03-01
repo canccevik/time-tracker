@@ -2,8 +2,11 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:date_picker_timeline_trendway/date_picker_widget.dart';
 
+import 'package:time_tracker/domain/models/settings/settings.dart';
+import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
 import 'package:time_tracker/presentation/screens/home/home.dart';
 import 'package:time_tracker/presentation/screens/history/history.dart';
 import 'package:time_tracker/presentation/screens/settings/settings.dart';
@@ -66,17 +69,21 @@ class _AppState extends State<App> {
     );
   }
 
-  DateTime mostRecentSunday(DateTime date) => DateTime(date.year, date.month, date.day - date.weekday % 7);
+  DateTime mostRecentWeekday(DateTime date, int weekday) => DateTime(date.year, date.month, date.day - (date.weekday - (weekday + 1)) % 7);
 
   Widget buildDatePicker(BuildContext context) {
-    return DatePicker(
-      mostRecentSunday(DateTime.now()),
-      initialSelectedDate: DateTime.now(),
-      daysCount: 7,
-      height: 90,
-      selectionColor: Theme.of(context).primaryColor,
-      selectedTextColor: Theme.of(context).iconTheme.color,
-      onDateChange: (date) {}
+    return BlocBuilder<SettingsBloc, SettingsModel>(
+      builder: (context, state) {
+        return DatePicker(
+          mostRecentWeekday(DateTime.now(), state.firstDayOfTheWeek),
+          initialSelectedDate: DateTime.now(),
+          daysCount: 7,
+          height: 90,
+          selectionColor: Theme.of(context).primaryColor,
+          selectedTextColor: Theme.of(context).iconTheme.color,
+          onDateChange: (date) {}
+        );
+      } 
     );
   }
 
