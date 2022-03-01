@@ -12,7 +12,7 @@ class CircularWave extends StatefulWidget {
 }
 
 class _CircularWaveState extends State<CircularWave> {
-  double waterHeight = 0.8;
+  double waterHeight = 0.0;
 
   WaterController waterController = WaterController();
 

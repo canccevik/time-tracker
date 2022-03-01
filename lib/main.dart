@@ -14,10 +14,12 @@ import 'package:time_tracker/presentation/constants/themes.dart';
 import 'package:time_tracker/domain/models/settings/settings.dart';
 import 'package:time_tracker/infrastructure/repositories/settings.dart';
 import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
+import 'package:time_tracker/domain/models/time_record/time_record.dart';
 
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(SettingsModelAdapter());
+  Hive.registerAdapter(TimeRecordModelAdapter());
 
   Box<SettingsModel> settingsBox = await Hive.openBox<SettingsModel>('settings');
   SettingsRepository settingsRepository = SettingsRepository(settingsBox);
