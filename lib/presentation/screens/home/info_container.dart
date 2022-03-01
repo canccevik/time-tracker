@@ -15,12 +15,6 @@ class _InfoContainerState extends State<InfoContainer> {
   final CustomTimerController controller = CustomTimerController();
 
   @override
-  void initState() {
-    controller.start();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
@@ -46,7 +40,7 @@ class _InfoContainerState extends State<InfoContainer> {
                 }
               ),
               Text(
-                '-01:40h',
+                '00:00h',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.red
@@ -59,7 +53,7 @@ class _InfoContainerState extends State<InfoContainer> {
                   CircleTimeInfo(
                     size: const Size(45, 45),
                     iconData: Icons.timer,
-                    time: '09:00',
+                    time: '00:00',
                     textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w500
                     )
@@ -67,7 +61,7 @@ class _InfoContainerState extends State<InfoContainer> {
                   CircleTimeInfo(
                     size: const Size(45, 45),
                     iconData: Icons.flag,
-                    time: '18:00',
+                    time: '00:00',
                     textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w500
                     )

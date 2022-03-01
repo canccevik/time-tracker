@@ -11,7 +11,7 @@ class TimeRecordModel {
   final DateTime startDate;
 
   @HiveField(2)
-  final DateTime stopDate;
+  final DateTime? stopDate;
 
   @HiveField(3)
   final int totalTime;
@@ -26,4 +26,28 @@ class TimeRecordModel {
     required this.totalTime,
     required this.isItOffDay
   });
+
+  static TimeRecordModel get initial => TimeRecordModel(
+    date: DateTime.now(),
+    startDate: DateTime.now(),
+    stopDate: null,
+    totalTime: 0,
+    isItOffDay: false
+  );
+
+  TimeRecordModel copyWith({
+    DateTime? date,
+    DateTime? startDate,
+    DateTime? stopDate,
+    int? totalTime,
+    bool? isItOffDay
+  }) {
+    return TimeRecordModel(
+      date: date ?? this.date,
+      startDate: startDate ?? this.startDate,
+      stopDate: stopDate ?? this.stopDate,
+      totalTime: totalTime ?? this.totalTime,
+      isItOffDay: isItOffDay ?? this.isItOffDay
+    );
+  }
 }

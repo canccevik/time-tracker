@@ -23,7 +23,7 @@ class SettingsModel {
     required this.isFlexibleWorker
   });
 
-  static get initial => SettingsModel(
+  static SettingsModel get initial => SettingsModel(
     firstDayOfTheWeek: 0,
     workingPeriod: 0,
     dailyWorkingHours: 1,
