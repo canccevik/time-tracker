@@ -6,7 +6,7 @@ class AppColors {
   static final primarySwatch = ColorCreator.createMaterialColor(primaryColor);
   static const primaryColor = Color(0xff5f80f5);
   static const scaffoldBackgroundColor = Color(0xfff5f7f9);
-  static const appBarBackgroundColor = Color(0xfff5f7f9);
+  static const appBarBackgroundColor = Colors.white;
   static const cardColor = Colors.white;
   static const defaultIconColor = Colors.white;
   static const primaryIconColor = Colors.black;
