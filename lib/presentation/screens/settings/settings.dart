@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:time_tracker/domain/models/settings/settings.dart';
+import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
 import 'package:time_tracker/presentation/screens/settings/settings_tile.dart';
 
 class Settings extends StatefulWidget {
@@ -34,55 +38,72 @@ class _SettingsState extends State<Settings> {
           width: MediaQuery.of(context).size.width,
           child: Padding(
             padding: const EdgeInsets.all(15),
-            child: Column(
-              children: [
-                SettingsTile(
-                  title: 'First day of the week',
-                  child: DropdownButton<String>(
-                    value: 'Monday',
-                    items: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (i) {}
-                  )
-                ),
-                SettingsTile(
-                  title: 'Working period',
-                  child: DropdownButton<String>(
-                    value: 'Weekly',
-                    items: ['Weekly', 'Monthly'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (i) {}
-                  )
-                ),
-                SettingsTile(
-                  title: 'Daily working hours',
-                  child: DropdownButton<String>(
-                    value: '9',
-                    items: List<String>.generate(24, (i) => (i + 1).toString()).map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (i) {}
-                  )
-                ),
-                SettingsTile(
-                  title: 'I am freelancer',
-                  child: Checkbox(
-                    value: false,
-                    onChanged: (val) {}
-                  )
-                )
-              ],
+            child: BlocBuilder<SettingsBloc, SettingsModel>(
+              builder: (context, state) {
+                SettingsBloc settingsBloc = context.read<SettingsBloc>();
+                List<String> days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                List<String> workingPeriods = ['Weekly', 'Monthly'];
+                List<String> dailyWorkingHours = List<String>.generate(24, (i) => (i + 1).toString());
+
+                return Column(
+                  children: [
+                    SettingsTile(
+                      title: 'First day of the week',
+                      child: DropdownButton<String>(
+                        value: days.elementAt(state.firstDayOfTheWeek),
+                        items: days.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (i) {
+                          settingsBloc.add(FirstDayOfTheWeekUpdated(days.indexOf(i!)));
+                        }
+                      )
+                    ),
+                    SettingsTile(
+                      title: 'Working period',
+                      child: DropdownButton<String>(
+                        value: workingPeriods.elementAt(state.workingPeriod),
+                        items: workingPeriods.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (i) {
+                          settingsBloc.add(WorkingPeriodUpdated(workingPeriods.indexOf(i!)));
+                        }
+                      )
+                    ),
+                    SettingsTile(
+                      title: 'Daily working hours',
+                      child: DropdownButton<String>(
+                        value: state.dailyWorkingHours.toString(),
+                        items: dailyWorkingHours.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (i) {
+                          settingsBloc.add(DailyWorkingHoursUpdated(dailyWorkingHours.indexOf(i!) + 1));
+                        }
+                      )
+                    ),
+                    SettingsTile(
+                      title: 'I am freelancer',
+                      child: Checkbox(
+                        value: state.isFlexibleWorker,
+                        onChanged: (val) {
+                          settingsBloc.add(IsFlexibleWorkerUpdated(val!));
+                        }
+                      )
+                    )
+                  ],
+                );
+              }
             ),
           ),
         ),

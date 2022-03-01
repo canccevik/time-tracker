@@ -19,7 +19,7 @@ class SettingsModelAdapter extends TypeAdapter<SettingsModel> {
     return SettingsModel(
       firstDayOfTheWeek: fields[0] == null ? 0 : fields[0] as int,
       workingPeriod: fields[1] == null ? 0 : fields[1] as int,
-      dailyWorkingHours: fields[2] == null ? 9 : fields[2] as int,
+      dailyWorkingHours: fields[2] == null ? 1 : fields[2] as int,
       isFlexibleWorker: fields[3] == null ? false : fields[3] as bool,
     );
   }

@@ -10,7 +10,7 @@ class SettingsModel {
   @HiveField(1, defaultValue: 0)
   final int workingPeriod;
 
-  @HiveField(2, defaultValue: 9)
+  @HiveField(2, defaultValue: 1)
   final int dailyWorkingHours;
 
   @HiveField(3, defaultValue: false)
@@ -22,4 +22,25 @@ class SettingsModel {
     required this.dailyWorkingHours,
     required this.isFlexibleWorker
   });
+
+  static get initial => SettingsModel(
+    firstDayOfTheWeek: 0,
+    workingPeriod: 0,
+    dailyWorkingHours: 1,
+    isFlexibleWorker: false
+  );
+
+  SettingsModel copyWith({
+    int? firstDayOfTheWeek,
+    int? workingPeriod,
+    int? dailyWorkingHours,
+    bool? isFlexibleWorker
+  }) {
+    return SettingsModel(
+      firstDayOfTheWeek: firstDayOfTheWeek ?? this.firstDayOfTheWeek,
+      workingPeriod: workingPeriod ?? this.workingPeriod,
+      dailyWorkingHours: dailyWorkingHours ?? this.dailyWorkingHours,
+      isFlexibleWorker: isFlexibleWorker ?? this.isFlexibleWorker
+    );
+  }
 }
