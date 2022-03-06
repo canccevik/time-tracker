@@ -9,6 +9,7 @@ import 'package:time_tracker/domain/models/settings/settings.dart';
 import 'package:time_tracker/domain/models/time_record/time_record.dart';
 import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
 import 'package:time_tracker/presentation/blocs/time_record/time_record_bloc.dart';
+import 'package:time_tracker/presentation/blocs/time_record/time_record_state.dart';
 import 'package:time_tracker/presentation/screens/home/home.dart';
 import 'package:time_tracker/presentation/screens/history/history.dart';
 import 'package:time_tracker/presentation/screens/settings/settings.dart';
@@ -74,14 +75,14 @@ class _AppState extends State<App> {
   }
 
   Widget _buildFloatingActionButton(BuildContext context) {
-    return BlocBuilder<TimeRecordBloc, TimeRecordModel>(
+    return BlocBuilder<TimeRecordBloc, TimeRecordState>(
       builder: (context, state) {
         return FloatingActionButton(
-          child: state.status != TimeRecordStatus.started ? const Icon(Icons.play_arrow) : const Icon(Icons.pause),
+          child: state.timeRecord.status != TimeRecordStatus.started ? const Icon(Icons.play_arrow) : const Icon(Icons.pause),
           onPressed: () {
             var timeRecordBloc = context.read<TimeRecordBloc>();
 
-            if (state.status != TimeRecordStatus.started) {
+            if (state.timeRecord.status != TimeRecordStatus.started) {
               timeRecordBloc.add(TimerStarted());
             }
             else {
