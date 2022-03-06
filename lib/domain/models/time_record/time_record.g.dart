@@ -20,7 +20,7 @@ class TimeRecordModelAdapter extends TypeAdapter<TimeRecordModel> {
       date: fields[0] as DateTime,
       startDate: fields[1] as DateTime,
       stopDate: fields[2] as DateTime,
-      totalTime: fields[3] as int,
+      totalTimeInMs: fields[3] as int,
       isItOffDay: fields[4] == null ? false : fields[4] as bool,
     );
   }
@@ -36,7 +36,7 @@ class TimeRecordModelAdapter extends TypeAdapter<TimeRecordModel> {
       ..writeByte(2)
       ..write(obj.stopDate)
       ..writeByte(3)
-      ..write(obj.totalTime)
+      ..write(obj.totalTimeInMs)
       ..writeByte(4)
       ..write(obj.isItOffDay);
   }

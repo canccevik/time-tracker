@@ -15,6 +15,8 @@ import 'package:time_tracker/domain/models/settings/settings.dart';
 import 'package:time_tracker/infrastructure/repositories/settings.dart';
 import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
 import 'package:time_tracker/domain/models/time_record/time_record.dart';
+import 'package:time_tracker/infrastructure/repositories/time_record.dart';
+import 'package:time_tracker/presentation/blocs/time_record/time_record_bloc.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -25,22 +27,26 @@ void main() async {
   SettingsRepository settingsRepository = SettingsRepository(settingsBox);
   SettingsModel initialSettings = settingsRepository.get('settings') ?? SettingsModel.initial;
 
+  Box<TimeRecordModel> timeRecordBox = await Hive.openBox<TimeRecordModel>('time_records');
+  TimeRecordRepository timeRecordRepository = TimeRecordRepository(timeRecordBox);
+  TimeRecordModel initialTimeRecord = TimeRecordModel.initial;
+
   runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Time Tracker',
-      theme: AppThemes.lightTheme,
-      builder: (context, widget) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider<SettingsBloc>(
-              create: (context) => SettingsBloc(initialSettings, settingsRepository)
-            )
-          ],
-          child: widget!
-        );
-      },
-      home: const App()
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<SettingsBloc>(
+          create: (context) => SettingsBloc(initialSettings, settingsRepository)
+        ),
+        BlocProvider<TimeRecordBloc>(
+          create: (context) => TimeRecordBloc(initialTimeRecord, timeRecordRepository)
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Time Tracker',
+        theme: AppThemes.lightTheme,
+        home: const App()
+      )
     )
   );
 }

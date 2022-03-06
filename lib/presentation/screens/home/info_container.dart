@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:custom_timer/custom_timer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:time_tracker/domain/models/time_record/time_record.dart';
+import 'package:time_tracker/presentation/blocs/time_record/time_record_bloc.dart';
 
 import 'package:time_tracker/presentation/widgets/circle_time_info.dart';
 
@@ -12,7 +15,7 @@ class InfoContainer extends StatefulWidget {
 }
 
 class _InfoContainerState extends State<InfoContainer> {
-  final CustomTimerController controller = CustomTimerController();
+  final CustomTimerController timerController = CustomTimerController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +31,24 @@ class _InfoContainerState extends State<InfoContainer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomTimer(
-                controller: controller,
-                begin: const Duration(seconds: 0),
-                end: const Duration(hours: 2),
-                builder: (time) {
-                  return Text(
-                    "${time.hours}:${time.minutes}:${time.seconds}",
-                    style: Theme.of(context).textTheme.headlineLarge
+              BlocConsumer<TimeRecordBloc, TimeRecordModel>(
+                listener: (context, state) {
+                  if (state.status == TimeRecordStatus.started) {
+                    return timerController.start();
+                  }
+                  timerController.pause();
+                },
+                builder: (context, state) {
+                  return CustomTimer(
+                    controller: timerController,
+                    begin: const Duration(seconds: 0),
+                    end: const Duration(hours: 2),
+                    builder: (time) {
+                      return Text(
+                        "${time.hours}:${time.minutes}:${time.seconds}",
+                        style: Theme.of(context).textTheme.headlineLarge
+                      );
+                    }
                   );
                 }
               ),

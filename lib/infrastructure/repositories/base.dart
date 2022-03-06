@@ -13,17 +13,27 @@ class BaseRepository<Model> extends AbstractBaseRepository<Model> {
   }
 
   @override
-  void put(String key, Model value) {
-    _box.put(key, value);
+  Iterable<Model?> getAll() {
+    return _box.values;
+  }
+
+  @override
+  void put(String key, Model model) {
+    _box.put(key, model);
   }
 
   @override
   void delete(String key) {
     _box.delete(key);
   }
-
+  
   @override
   void clear() {
     _box.clear();
+  }
+
+  @override
+  void add(Model model) {
+    _box.add(model);
   }
 }

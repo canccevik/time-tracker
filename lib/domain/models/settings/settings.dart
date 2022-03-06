@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'settings.g.dart';
 
 @HiveType(typeId: 0)
-class SettingsModel {
+class SettingsModel extends HiveObject {
   @HiveField(0, defaultValue: 0)
   final int firstDayOfTheWeek;
 
