@@ -6,14 +6,13 @@ import 'package:time_tracker/domain/models/settings/settings.dart';
 import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
 import 'package:time_tracker/presentation/screens/settings/settings_tile.dart';
 
-class Settings extends StatefulWidget {
-  const Settings({Key? key}) : super(key: key);
+class Settings extends StatelessWidget {
+  Settings({Key? key}) : super(key: key);
 
-  @override
-  State<Settings> createState() => _SettingsState();
-}
+  final List<String> days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  final List<String> workingPeriods = ['Weekly', 'Monthly'];
+  final List<String> dailyWorkingHours = List<String>.generate(24, (i) => (i + 1).toString());
 
-class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,10 +40,7 @@ class _SettingsState extends State<Settings> {
             child: BlocBuilder<SettingsBloc, SettingsModel>(
               builder: (context, state) {
                 SettingsBloc settingsBloc = context.read<SettingsBloc>();
-                List<String> days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                List<String> workingPeriods = ['Weekly', 'Monthly'];
-                List<String> dailyWorkingHours = List<String>.generate(24, (i) => (i + 1).toString());
-
+                
                 return Column(
                   children: [
                     SettingsTile(

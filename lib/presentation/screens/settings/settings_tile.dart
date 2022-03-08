@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SettingsTile extends StatefulWidget {
+class SettingsTile extends StatelessWidget {
   final String title;
   final Widget child;
 
   const SettingsTile({required this.title, required this.child, Key? key}) : super(key: key);
 
   @override
-  State<SettingsTile> createState() => _SettingsTileState();
-}
-
-class _SettingsTileState extends State<SettingsTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -20,10 +16,10 @@ class _SettingsTileState extends State<SettingsTile> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              widget.title,
+              title,
               style: Theme.of(context).textTheme.bodyMedium
             ),
-            widget.child
+            child
           ],
         ),
       ),
