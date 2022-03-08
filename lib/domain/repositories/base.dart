@@ -1,13 +1,13 @@
 abstract class AbstractBaseRepository<Model> {
-  Model? get(String key);
+  Model? get(dynamic key);
   
-  void put(String key, Model model);
+  Future<void> put(String key, Model model);
 
-  void delete(String key);
+  Future<void> delete(String key);
 
-  void clear();
+  Future<void> clear();
 
-  void add(Model model);
+  Future<Model?> add(Model model);
 
   Iterable<Model?> getAll();
 }

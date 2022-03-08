@@ -17,18 +17,19 @@ class TimeRecordModelAdapter extends TypeAdapter<TimeRecordModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TimeRecordModel(
-      date: fields[0] as DateTime,
-      startDate: fields[1] as DateTime,
-      stopDate: fields[2] as DateTime,
+      date: fields[0] as DateTime?,
+      startDate: fields[1] as DateTime?,
+      stopDate: fields[2] as DateTime?,
       totalTimeInMs: fields[3] as int,
       isItOffDay: fields[4] == null ? false : fields[4] as bool,
+      status: fields[5] as TimeRecordStatus,
     );
   }
 
   @override
   void write(BinaryWriter writer, TimeRecordModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class TimeRecordModelAdapter extends TypeAdapter<TimeRecordModel> {
       ..writeByte(3)
       ..write(obj.totalTimeInMs)
       ..writeByte(4)
-      ..write(obj.isItOffDay);
+      ..write(obj.isItOffDay)
+      ..writeByte(5)
+      ..write(obj.status);
   }
 
   @override

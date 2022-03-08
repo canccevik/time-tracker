@@ -8,7 +8,7 @@ class BaseRepository<Model> extends AbstractBaseRepository<Model> {
   BaseRepository(this._box);
   
   @override
-  Model? get(String key) {
+  Model? get(dynamic key) {
     return _box.get(key);
   }
 
@@ -18,22 +18,23 @@ class BaseRepository<Model> extends AbstractBaseRepository<Model> {
   }
 
   @override
-  void put(String key, Model model) {
-    _box.put(key, model);
+  Future<void> put(dynamic key, Model model) async {
+    await _box.put(key, model);
   }
 
   @override
-  void delete(String key) {
-    _box.delete(key);
+  Future<void> delete(dynamic key) async {
+    await _box.delete(key);
   }
   
   @override
-  void clear() {
-    _box.clear();
+  Future<void> clear() async {
+    await _box.clear();
   }
 
   @override
-  void add(Model model) {
-    _box.add(model);
+  Future<Model?> add(Model model) async {
+    int key = await _box.add(model);
+    return get(key);
   }
 }

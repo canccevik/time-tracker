@@ -45,6 +45,7 @@ dependencies:
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
   jiffy: ^5.0.0
+  collection: ^1.15.0
 
 dev_dependencies:
   flutter_test:

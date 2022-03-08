@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 
+import 'package:jiffy/jiffy.dart';
+
 import 'package:time_tracker/presentation/screens/history/edit_history/edit_history.dart';
 import 'package:time_tracker/presentation/screens/history/progress_bar.dart';
 import 'package:time_tracker/presentation/widgets/circle_time_info.dart';
 
-class HistoryTile extends StatefulWidget {
-  const HistoryTile({Key? key}) : super(key: key);
+class HistoryTile extends StatelessWidget {
+  final DateTime date, startDate, stopDate;
+  final int totalTimeInMs;
 
-  @override
-  State<HistoryTile> createState() => _HistoryTileState();
-}
+  const HistoryTile({
+    required this.date,
+    required this.startDate,
+    required this.stopDate,
+    required this.totalTimeInMs,
+    Key? key
+  }) : super(key: key);
 
-class _HistoryTileState extends State<HistoryTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -36,7 +42,7 @@ class _HistoryTileState extends State<HistoryTile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '19 Feb 2022',
+                        Jiffy(date).MMMMEEEEd,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 18
@@ -50,13 +56,13 @@ class _HistoryTileState extends State<HistoryTile> {
                             CircleTimeInfo(
                               size: const Size(35, 35),
                               iconData: Icons.timer,
-                              time: '09:00',
+                              time: Jiffy(startDate).Hm,
                               textStyle: Theme.of(context).textTheme.labelLarge!
                             ),
                             CircleTimeInfo(
                               size: const Size(35, 35),
                               iconData: Icons.flag,
-                              time: '18:00',
+                              time: Jiffy(stopDate).Hm,
                               textStyle: Theme.of(context).textTheme.labelLarge!
                             ),
                           ],
@@ -65,11 +71,7 @@ class _HistoryTileState extends State<HistoryTile> {
                     ],
                   ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [ProgressBar()],
-                )
+                ProgressBar(totalTimeInMs: totalTimeInMs)
               ],
             ),
           ),

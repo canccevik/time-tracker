@@ -1,25 +1,25 @@
 import 'package:hive/hive.dart';
 
-part 'time_record.g.dart';
+import 'package:time_tracker/domain/models/time_record/time_record_status/time_record_status.dart';
 
-enum TimeRecordStatus { initial, started, finished }
+part 'time_record.g.dart';
 
 @HiveType(typeId: 1)
 class TimeRecordModel extends HiveObject {
   @HiveField(0)
-  final DateTime? date;
+  DateTime? date;
 
   @HiveField(1)
-  final DateTime? startDate;
+  DateTime? startDate;
 
   @HiveField(2)
-  final DateTime? stopDate;
+  DateTime? stopDate;
 
   @HiveField(3)
-  final int totalTimeInMs;
+  int totalTimeInMs;
 
   @HiveField(4, defaultValue: false)
-  final bool isItOffDay;
+  bool isItOffDay;
 
   @HiveField(5)
   TimeRecordStatus status;
@@ -27,8 +27,8 @@ class TimeRecordModel extends HiveObject {
   TimeRecordModel({
     required this.date,
     required this.startDate,
-    required this.stopDate,
-    required this.totalTimeInMs,
+    this.stopDate,
+    this.totalTimeInMs = 0,
     this.isItOffDay = false,
     this.status = TimeRecordStatus.initial
   });
@@ -39,22 +39,4 @@ class TimeRecordModel extends HiveObject {
     stopDate: null,
     totalTimeInMs: 0
   );
-
-  TimeRecordModel copyWith({
-    DateTime? date,
-    DateTime? startDate,
-    DateTime? stopDate,
-    int? totalTimeInMs,
-    bool? isItOffDay,
-    TimeRecordStatus? status
-  }) {
-    return TimeRecordModel(
-      date: date ?? this.date,
-      startDate: startDate ?? this.startDate,
-      stopDate: stopDate ?? this.stopDate,
-      totalTimeInMs: totalTimeInMs ?? this.totalTimeInMs,
-      isItOffDay: isItOffDay ?? this.isItOffDay,
-      status: status ?? this.status
-    );
-  }
 }

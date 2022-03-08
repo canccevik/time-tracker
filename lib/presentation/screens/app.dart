@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:date_picker_timeline_trendway/date_picker_widget.dart';
 
 import 'package:time_tracker/domain/models/settings/settings.dart';
-import 'package:time_tracker/domain/models/time_record/time_record.dart';
+import 'package:time_tracker/domain/models/time_record/time_record_status/time_record_status.dart';
 import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
-import 'package:time_tracker/presentation/blocs/time_record/time_record_bloc.dart';
-import 'package:time_tracker/presentation/blocs/time_record/time_record_state.dart';
+import 'package:time_tracker/presentation/blocs/time/time_bloc.dart';
+import 'package:time_tracker/presentation/blocs/time/time_state.dart';
 import 'package:time_tracker/presentation/screens/home/home.dart';
 import 'package:time_tracker/presentation/screens/history/history.dart';
 import 'package:time_tracker/presentation/screens/settings/settings.dart';
@@ -24,9 +24,15 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   int currentScreenIndex = 0;
 
-  var screens = const [Home(), History()];
+  List<Widget> screens = const [Home(), History()];
   
-  Widget activeScreen = const Home();
+  late Widget activeScreen;
+
+  @override
+  void initState() {
+    activeScreen = screens[0];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +54,7 @@ class _AppState extends State<App> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Settings())
+                  MaterialPageRoute(builder: (context) => Settings())
                 );
               }
             ),
@@ -75,14 +81,14 @@ class _AppState extends State<App> {
   }
 
   Widget _buildFloatingActionButton(BuildContext context) {
-    return BlocBuilder<TimeRecordBloc, TimeRecordState>(
+    return BlocBuilder<TimeBloc, TimeState>(
       builder: (context, state) {
         return FloatingActionButton(
-          child: state.timeRecord.status != TimeRecordStatus.started ? const Icon(Icons.play_arrow) : const Icon(Icons.pause),
+          child: state.currentRecord.status != TimeRecordStatus.started ? const Icon(Icons.play_arrow) : const Icon(Icons.pause),
           onPressed: () {
-            var timeRecordBloc = context.read<TimeRecordBloc>();
+            TimeBloc timeRecordBloc = context.read<TimeBloc>();
 
-            if (state.timeRecord.status != TimeRecordStatus.started) {
+            if (state.currentRecord.status != TimeRecordStatus.started) {
               timeRecordBloc.add(TimerStarted());
             }
             else {

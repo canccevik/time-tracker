@@ -5,16 +5,16 @@ part 'settings.g.dart';
 @HiveType(typeId: 0)
 class SettingsModel extends HiveObject {
   @HiveField(0, defaultValue: 0)
-  final int firstDayOfTheWeek;
+  int firstDayOfTheWeek;
 
   @HiveField(1, defaultValue: 0)
-  final int workingPeriod;
+  int workingPeriod;
 
   @HiveField(2, defaultValue: 1)
-  final int dailyWorkingHours;
+  int dailyWorkingHours;
 
   @HiveField(3, defaultValue: false)
-  final bool isFlexibleWorker;
+  bool isFlexibleWorker;
 
   SettingsModel({
     required this.firstDayOfTheWeek,

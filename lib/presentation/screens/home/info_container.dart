@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:time_tracker/domain/models/time_record/time_record.dart';
-import 'package:time_tracker/presentation/blocs/time_record/time_record_bloc.dart';
-import 'package:time_tracker/presentation/blocs/time_record/time_record_state.dart';
+import 'package:time_tracker/presentation/blocs/time/time_bloc.dart';
+import 'package:time_tracker/presentation/blocs/time/time_state.dart';
 import 'package:time_tracker/presentation/widgets/circle_time_info.dart';
+import 'package:time_tracker/domain/models/time_record/time_record_status/time_record_status.dart';
 
 class InfoContainer extends StatefulWidget {
   const InfoContainer({Key? key}) : super(key: key);
@@ -32,9 +32,9 @@ class _InfoContainerState extends State<InfoContainer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              BlocConsumer<TimeRecordBloc, TimeRecordState>(
+              BlocConsumer<TimeBloc, TimeState>(
                 listener: (context, state) {
-                  if (state.timeRecord.status == TimeRecordStatus.started) {
+                  if (state.currentRecord.status == TimeRecordStatus.started) {
                     return timerController.start();
                   }
                   timerController.pause();
