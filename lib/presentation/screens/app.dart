@@ -76,7 +76,7 @@ class _AppState extends State<App> {
       ),
       bottomNavigationBar: _buildNavbar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _buildFloatingActionButton(context),
+      floatingActionButton: currentScreenIndex == 0 ? _buildFloatingActionButton(context) : null,
     );
   }
 

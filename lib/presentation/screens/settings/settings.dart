@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:time_tracker/domain/models/settings/settings.dart';
 import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
+import 'package:time_tracker/presentation/blocs/time/time_bloc.dart';
 import 'package:time_tracker/presentation/screens/settings/settings_tile.dart';
 
 class Settings extends StatelessWidget {
@@ -40,6 +41,7 @@ class Settings extends StatelessWidget {
             child: BlocBuilder<SettingsBloc, SettingsModel>(
               builder: (context, state) {
                 SettingsBloc settingsBloc = context.read<SettingsBloc>();
+                TimeBloc timeBloc = context.read<TimeBloc>();
                 
                 return Column(
                   children: [
@@ -55,6 +57,7 @@ class Settings extends StatelessWidget {
                         }).toList(),
                         onChanged: (i) {
                           settingsBloc.add(FirstDayOfTheWeekUpdated(days.indexOf(i!)));
+                          timeBloc.add(RecordsLoaded());
                         }
                       )
                     ),
@@ -85,6 +88,7 @@ class Settings extends StatelessWidget {
                         }).toList(),
                         onChanged: (i) {
                           settingsBloc.add(DailyWorkingHoursUpdated(dailyWorkingHours.indexOf(i!) + 1));
+                          timeBloc.add(RecordsLoaded());
                         }
                       )
                     ),

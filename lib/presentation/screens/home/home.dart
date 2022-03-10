@@ -9,11 +9,11 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        SizedBox(height: 25),
+      children: [
+        const SizedBox(height: 25),
         CircularWave(),
-        SizedBox(height: 25),
-        InfoContainer()
+        const SizedBox(height: 25),
+        const InfoContainer()
       ]
     );
   }

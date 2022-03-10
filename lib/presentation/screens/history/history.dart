@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:time_tracker/presentation/blocs/time/time_bloc.dart';
@@ -15,32 +16,28 @@ class History extends StatefulWidget {
 
 class _HistoryState extends State<History> {
   @override
-  void initState() {
-    super.initState();
-    context.read<TimeBloc>().add(RecordsLoaded());
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: BlocBuilder<TimeBloc, TimeState>(
-        builder: (context, state) {
-          Iterable<TimeRecordModel?> dailyRecords = state.dailyRecords;
-          return ListView.builder(
-            itemCount: dailyRecords.length,
-            itemBuilder: (ctx, i) {
-              TimeRecordModel? dailyRecord = dailyRecords.elementAt(i);
-              return HistoryTile(
+    return BlocBuilder<TimeBloc, TimeState>(
+      builder: (context, state) {
+        Iterable<TimeRecordModel?> dailyRecords = state.dailyRecords;
+
+        return ListView.builder(
+          itemCount: dailyRecords.length,
+          itemBuilder: (ctx, i) {
+            TimeRecordModel? dailyRecord = dailyRecords.elementAt(i);
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: HistoryTile(
                 date: dailyRecord!.date!,
                 startDate: dailyRecord.startDate!,
                 stopDate: dailyRecord.stopDate!,
                 totalTimeInMs: dailyRecord.totalTimeInMs
-              );
-            }
-          );
-        }
-      ),
+              ),
+            );
+          }
+        );
+      }
     );
   }
 }

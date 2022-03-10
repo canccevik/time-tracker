@@ -5,8 +5,6 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 // ignore: unused_import
 import 'package:path_provider/path_provider.dart';
-// ignore: unused_import
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:time_tracker/presentation/screens/app.dart';
@@ -45,8 +43,9 @@ void main() async {
         BlocProvider<TimeBloc>(
           create: (context) => TimeBloc(
             timeRecordModel: initialTimeRecord,
-            timeRecordRepository: timeRecordRepository
-          )
+            timeRecordRepository: timeRecordRepository,
+            settingsRepository: settingsRepository
+          )..add(RecordsLoaded())
         )
       ],
       child: MaterialApp(
