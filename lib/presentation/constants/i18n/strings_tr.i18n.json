@@ -1,0 +1,42 @@
+{
+    "common": {
+        "appName": "Zaman Takipçisi",
+        "home": "Ana Sayfa",
+        "history": "Geçmiş",
+        "symbolOfHour": "s",
+        "weekdays": {
+            "monday": "Pazartesi",
+            "tuesday": "Salı",
+            "wednesday": "Çarşamba",
+            "thursday": "Perşembe",
+            "friday": "Cuma",
+            "saturday": "Cumartesi",
+            "sunday": "Pazar"
+        },
+        "languages": {
+            "english": {
+                "name": "İngilizce",
+                "code": "en"
+            },
+            "turkish": {
+                "name": "Türkçe",
+                "code": "tr"
+            }
+        }
+    },
+    "settings": {
+        "title": "Ayarlar",
+        "firstDayOfTheWeek": "Haftanın ilk günü",
+        "workingPeriod": "Çalışma periyodu",
+        "workingPeriods": {
+            "weekly": "Haftalık",
+            "monthly": "Aylık"
+        },
+        "dailyWorkingHours": "Günlük çalışılan saat",
+        "iAmFreelancer": "Serbest çalışanım",
+        "appLanguage": "Dil",
+        "editHistory": {
+            "title": "Geçmişi Düzenle"
+        }
+    }
+}

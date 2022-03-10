@@ -7,6 +7,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:time_tracker/domain/models/time_record/time_record.dart';
 import 'package:time_tracker/presentation/blocs/time/time_bloc.dart';
 import 'package:time_tracker/presentation/blocs/time/time_state.dart';
+import 'package:time_tracker/presentation/constants/i18n/strings.g.dart';
 import 'package:time_tracker/presentation/widgets/circle_time_info.dart';
 import 'package:time_tracker/domain/models/time_record/time_record_status/time_record_status.dart';
 
@@ -61,7 +62,7 @@ class _InfoContainerState extends State<InfoContainer> {
                     }
                   ),
                   Text(
-                    '${additionalTimeStr}h',
+                    additionalTimeStr + t.common.symbolOfHour,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: state.additionalTimeInMs > 0 ? Colors.green : Colors.red

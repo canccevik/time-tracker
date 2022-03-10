@@ -16,11 +16,15 @@ class SettingsModel extends HiveObject {
   @HiveField(3, defaultValue: false)
   bool isFlexibleWorker;
 
+  @HiveField(4)
+  String? appLanguage;
+
   SettingsModel({
     required this.firstDayOfTheWeek,
     required this.workingPeriod,
     required this.dailyWorkingHours,
-    required this.isFlexibleWorker
+    required this.isFlexibleWorker,
+    this.appLanguage,
   });
 
   static SettingsModel get initial => SettingsModel(
@@ -34,13 +38,15 @@ class SettingsModel extends HiveObject {
     int? firstDayOfTheWeek,
     int? workingPeriod,
     int? dailyWorkingHours,
-    bool? isFlexibleWorker
+    bool? isFlexibleWorker,
+    String? appLanguage
   }) {
     return SettingsModel(
       firstDayOfTheWeek: firstDayOfTheWeek ?? this.firstDayOfTheWeek,
       workingPeriod: workingPeriod ?? this.workingPeriod,
       dailyWorkingHours: dailyWorkingHours ?? this.dailyWorkingHours,
-      isFlexibleWorker: isFlexibleWorker ?? this.isFlexibleWorker
+      isFlexibleWorker: isFlexibleWorker ?? this.isFlexibleWorker,
+      appLanguage: appLanguage ?? this.appLanguage
     );
   }
 }

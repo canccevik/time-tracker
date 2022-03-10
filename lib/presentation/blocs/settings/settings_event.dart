@@ -21,3 +21,9 @@ class IsFlexibleWorkerUpdated extends SettingsEvent {
   final bool isFlexibleWorker;
   IsFlexibleWorkerUpdated(this.isFlexibleWorker);
 }
+
+class AppLanguageUpdated extends SettingsEvent {
+  final String appLanguage;
+  AppLanguageUpdated(this.appLanguage);
+}
+

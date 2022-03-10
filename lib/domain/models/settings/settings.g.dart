@@ -21,13 +21,14 @@ class SettingsModelAdapter extends TypeAdapter<SettingsModel> {
       workingPeriod: fields[1] == null ? 0 : fields[1] as int,
       dailyWorkingHours: fields[2] == null ? 1 : fields[2] as int,
       isFlexibleWorker: fields[3] == null ? false : fields[3] as bool,
+      appLanguage: fields[4] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, SettingsModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.firstDayOfTheWeek)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class SettingsModelAdapter extends TypeAdapter<SettingsModel> {
       ..writeByte(2)
       ..write(obj.dailyWorkingHours)
       ..writeByte(3)
-      ..write(obj.isFlexibleWorker);
+      ..write(obj.isFlexibleWorker)
+      ..writeByte(4)
+      ..write(obj.appLanguage);
   }
 
   @override

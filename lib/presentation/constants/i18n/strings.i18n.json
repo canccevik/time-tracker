@@ -1,0 +1,42 @@
+{
+    "common": {
+        "appName": "Time Tracker",
+        "home": "Home",
+        "history": "History",
+        "symbolOfHour": "h",
+        "weekdays": {
+            "monday": "Monday",
+            "tuesday": "Tuesday",
+            "wednesday": "Wednesday",
+            "thursday": "Thursday",
+            "friday": "Friday",
+            "saturday": "Saturday",
+            "sunday": "Sunday"
+        },
+        "languages": {
+            "english": {
+                "name": "English",
+                "code": "en"
+            },
+            "turkish": {
+                "name": "Turkish",
+                "code": "tr"
+            }
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "firstDayOfTheWeek": "First day of the week",
+        "workingPeriod": "Working period",
+        "workingPeriods": {
+            "weekly": "Weekly",
+            "monthly": "Monthly"
+        },
+        "dailyWorkingHours": "Daily working hours",
+        "iAmFreelancer": "I am freelancer",
+        "appLanguage": "Language",
+        "editHistory": {
+            "title": "Edit History"
+        }
+    }
+}

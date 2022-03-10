@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:time_tracker/presentation/constants/i18n/strings.g.dart';
+
 class EditHistory extends StatefulWidget {
   const EditHistory({Key? key}) : super(key: key);
 
@@ -13,7 +15,7 @@ class _EditHistoryState extends State<EditHistory> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Edit History',
+          t.settings.editHistory.title,
           style: Theme.of(context).textTheme.titleLarge
         ),
         elevation: 0,

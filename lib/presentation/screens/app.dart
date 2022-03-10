@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:date_picker_timeline_trendway/date_picker_widget.dart';
+import 'package:jiffy/jiffy.dart';
 
 import 'package:time_tracker/domain/models/settings/settings.dart';
 import 'package:time_tracker/domain/models/time_record/time_record_status/time_record_status.dart';
 import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
 import 'package:time_tracker/presentation/blocs/time/time_bloc.dart';
 import 'package:time_tracker/presentation/blocs/time/time_state.dart';
+import 'package:time_tracker/presentation/constants/i18n/strings.g.dart';
 import 'package:time_tracker/presentation/screens/home/home.dart';
 import 'package:time_tracker/presentation/screens/history/history.dart';
 import 'package:time_tracker/presentation/screens/settings/settings.dart';
@@ -28,8 +30,13 @@ class _AppState extends State<App> {
   
   late Widget activeScreen;
 
+  void setJiffyLocale() async {
+    await Jiffy.locale(LocaleSettings.currentLocale.flutterLocale.languageCode);
+  }
+
   @override
   void initState() {
+    setJiffyLocale();
     activeScreen = screens[0];
     super.initState();
   }
@@ -39,7 +46,7 @@ class _AppState extends State<App> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Time Tracker',
+          t.common.appName,
           style: Theme.of(context).textTheme.titleLarge
         ),
         elevation: 0,
@@ -110,6 +117,7 @@ class _AppState extends State<App> {
         return DatePicker(
           _getMostRecentWeekday(DateTime.now(), state.firstDayOfTheWeek),
           initialSelectedDate: DateTime.now(),
+          locale: TranslationProvider.of(context).flutterLocale.languageCode,
           daysCount: 7,
           height: 90,
           selectionColor: Theme.of(context).primaryColor,
@@ -129,14 +137,14 @@ class _AppState extends State<App> {
           activeScreen = screens.elementAt(i);
         });
       },
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home'
+          icon: const Icon(Icons.home),
+          label: t.common.home
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.history),
-          label: 'History'
+          icon: const Icon(Icons.history),
+          label: t.common.history
         )
       ],
     );

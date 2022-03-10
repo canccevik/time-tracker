@@ -13,6 +13,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsModel> {
     on<WorkingPeriodUpdated>(_onWorkingPeriodUpdated);
     on<DailyWorkingHoursUpdated>(_onDailyWorkingHoursUpdated);
     on<IsFlexibleWorkerUpdated>(_onIsFlexibleWorkerUpdated);
+    on<AppLanguageUpdated>(_onAppLanguageUpdated);
   }
 
   void _onFirstDayOfTheWeekUpdated(FirstDayOfTheWeekUpdated event, Emitter<SettingsModel> emit) async {
@@ -38,6 +39,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsModel> {
 
   void _onIsFlexibleWorkerUpdated(IsFlexibleWorkerUpdated event, Emitter<SettingsModel> emit) async {
     SettingsModel updatedSettings = state.copyWith(isFlexibleWorker: event.isFlexibleWorker);
+
+    emit(updatedSettings);
+    await settingsRepository.put('settings', updatedSettings);
+  }
+
+  void _onAppLanguageUpdated(AppLanguageUpdated event, Emitter<SettingsModel> emit) async {
+    SettingsModel updatedSettings = state.copyWith(appLanguage: event.appLanguage);
 
     emit(updatedSettings);
     await settingsRepository.put('settings', updatedSettings);

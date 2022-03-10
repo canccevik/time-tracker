@@ -6,6 +6,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:time_tracker/domain/models/settings/settings.dart';
 import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
+import 'package:time_tracker/presentation/constants/i18n/strings.g.dart';
 
 class ProgressBar extends StatelessWidget {
   final int totalTimeInMs;
@@ -25,7 +26,7 @@ class ProgressBar extends StatelessWidget {
           lineWidth: 7,
           percent: percentValue > 1 ? 1 : percentValue,
           center: Text(
-            '${totalTimeStr}h',
+            totalTimeStr + t.common.symbolOfHour,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontWeight: FontWeight.bold
             )
