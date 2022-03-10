@@ -14,12 +14,11 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<SettingsBloc, SettingsModel>(
       builder: (context, state) {
-        String totalTimeStr = Jiffy.unixFromMillisecondsSinceEpoch(totalTimeInMs).Hm;
+        String totalTimeStr = Jiffy(DateTime.fromMillisecondsSinceEpoch(totalTimeInMs).toUtc()).Hm;
         double dailyWorkingHoursInMs = state.dailyWorkingHours * 60 * 60 * 1000;
-        double percentValue = ((totalTimeInMs / dailyWorkingHoursInMs) * 100) * 0.1;
+        double percentValue = totalTimeInMs / dailyWorkingHoursInMs;
 
         return CircularPercentIndicator(
           radius: 50.0,
