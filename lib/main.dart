@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:jiffy/jiffy.dart';
 // ignore: unused_import
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +37,7 @@ void main() async {
 
   String appLanguage = initialSettings.appLanguage ?? LocaleSettings.useDeviceLocale().flutterLocale.languageCode;
   LocaleSettings.setLocaleRaw(appLanguage);
+  initialSettings.appLanguage = appLanguage;
 
   runApp(
     TranslationProvider(

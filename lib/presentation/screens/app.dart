@@ -30,6 +30,8 @@ class _AppState extends State<App> {
   
   late Widget activeScreen;
 
+  DatePickerController datePickerController = DatePickerController();
+
   void setJiffyLocale() async {
     await Jiffy.locale(LocaleSettings.currentLocale.flutterLocale.languageCode);
   }
@@ -39,6 +41,7 @@ class _AppState extends State<App> {
     setJiffyLocale();
     activeScreen = screens[0];
     super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) => datePickerController.animateToSelection());
   }
 
   @override
@@ -107,21 +110,36 @@ class _AppState extends State<App> {
     );
   }
 
-  DateTime _getMostRecentWeekday(DateTime date, int weekday) {
-    return DateTime(date.year, date.month, date.day - (date.weekday - (weekday + 1)) % 7);
+  DateTime _getStartDateOfDatePicker(DateTime date, int workingPeriod, int firstDayOfTheWeek) {
+    return DateTime(date.year, date.month, workingPeriod == 1 ? 1 : date.day - (date.weekday - (firstDayOfTheWeek + 1)) % 7);
+  }
+
+  List<DateTime> _getEnabledDates(DateTime startDate, int workingPeriod) {
+    int daysCount = DateTimeRange(start: startDate, end: DateTime.now()).duration.inDays + 1;
+    int dayToStart = workingPeriod == 0 ? startDate.day : 1;
+    return List.generate(daysCount, (i) => DateTime(startDate.year, startDate.month, i + dayToStart));
   }
 
   Widget _buildDatePicker(BuildContext context) {
-    return BlocBuilder<SettingsBloc, SettingsModel>(
+    return BlocConsumer<SettingsBloc, SettingsModel>(
+      listener: (context, state) {
+        datePickerController.animateToSelection();
+      },
       builder: (context, state) {
+        DateTime now = DateTime.now();
+        DateTime startDate = _getStartDateOfDatePicker(DateTime.now(), state.workingPeriod, state.firstDayOfTheWeek);
+        int daysCount = state.workingPeriod == 0 ?  7 : DateTime(now.year, now.month + 1, 0).day;
+        
         return DatePicker(
-          _getMostRecentWeekday(DateTime.now(), state.firstDayOfTheWeek),
+          startDate,
           initialSelectedDate: DateTime.now(),
           locale: TranslationProvider.of(context).flutterLocale.languageCode,
-          daysCount: 7,
+          daysCount: daysCount,
+          controller: datePickerController,
           height: 90,
           selectionColor: Theme.of(context).primaryColor,
           selectedTextColor: Theme.of(context).iconTheme.color,
+          enabledDates: _getEnabledDates(startDate, state.workingPeriod),
           onDateChange: (date) {}
         );
       } 

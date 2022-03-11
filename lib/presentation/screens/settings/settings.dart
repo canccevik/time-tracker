@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jiffy/jiffy.dart';
 
 import 'package:time_tracker/domain/models/settings/settings.dart';
 import 'package:time_tracker/presentation/blocs/settings/settings_bloc.dart';
@@ -124,9 +125,10 @@ class Settings extends StatelessWidget {
                             value: language['code']
                           );
                         }).toList(),
-                        onChanged: (code) {
+                        onChanged: (code) async {
                           settingsBloc.add(AppLanguageUpdated(code!));
                           LocaleSettings.setLocaleRaw(code);
+                          await Jiffy.locale(code);
                         }
                       )
                     ),
